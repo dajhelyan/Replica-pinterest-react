@@ -62,11 +62,19 @@ const ContainerImg = () => {
 
     useEffect(() => {
         fetch('https://api.unsplash.com/photos/?client_id=4c974f2e37b1799fdb6e91a0f891a25df26b687e9e6eb77816d9988dd5142e59')
-        .then((res) => res.json)  
-        .then((res) => {
-            console.log(res.json, 'data');
-            
-        }) 
+            .then((response) => {
+                return response.json();
+            })
+            .then((myJson) => {
+                console.log(myJson);
+            });
+
+        /* fetch('https://api.unsplash.com/photos/?client_id=4c974f2e37b1799fdb6e91a0f891a25df26b687e9e6eb77816d9988dd5142e59')
+            .then(res => res.json())
+            .then((res) => {
+                console.log(res.json, 'data');
+
+            }) */
 
     })
     return (
