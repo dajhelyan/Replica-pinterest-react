@@ -51,7 +51,7 @@ const Header = () => {
             <figure>
                 <img src="././public/images/logo.png" alt="logo-pinterest" />
             </figure>
-            <input placeholder="Buscar" />
+            <input placeholder="Buscar" /> {/* componente que debe recibir api */}
             <button>Registrarse</button>
             <button>Iniciar sesión</button>
         </header>
@@ -68,20 +68,14 @@ const ContainerImg = () => {
             .then((myJson) => {
                 console.log(myJson);
             });
-
-        /* fetch('https://api.unsplash.com/photos/?client_id=4c974f2e37b1799fdb6e91a0f891a25df26b687e9e6eb77816d9988dd5142e59')
-            .then(res => res.json())
-            .then((res) => {
-                console.log(res.json, 'data');
-
-            }) */
-
     })
     return (
         <h1>Mostrando data</h1>
     )
 
 }
+
+
 
 
 // Hook de estado, renderizando un contador
@@ -103,28 +97,31 @@ const FunctionCount = () => {
     )
 }
 
-/* const ListaDeImagenes = (animal, imagenes) => {
+const ListaDeImagenes = ({ animal, imagenes }) => {
     return (
         <div>
             <p>{animal}</p>
             <ul className='mascotas'>
                 {
                     imagenes.map((imagen) => {
-                        return <Image alt={imagen.alt} url={imagen.url} />
+                        return <Image url={imagen.url} alt={imagen.alt} />
                     })
                 }
             </ul>
         </div>
     )
 }
- */
-/* const img = (imagenes) => {
-    imagenes.map((imagen) => {
-        return <Image alt={imagen.alt} url={imagen.url} />
-    })
+
+const Image = ({ url, alt }) => {
+    return (
+        <li>
+            <img src={url} alt={alt} height="100" />
+            Image Caption
+        </li> 
+    )    
 }
- */
-class ListaDeImagenes extends React.Component {
+
+/* class ListaDeImagenes extends React.Component {
 
     render() {
         const { animal, imagenes } = this.props;
@@ -141,9 +138,9 @@ class ListaDeImagenes extends React.Component {
             </div>
         )
     }
-}
+} */
 
-class Image extends React.Component {
+/* class Image extends React.Component {
     render() {
         return (
             <li>
@@ -152,5 +149,5 @@ class Image extends React.Component {
       </li>
         )
     }
-}
+} */
 export default PinterestApp;
