@@ -29,16 +29,19 @@ import React, { useState, useEffect } from 'react';
 } */
 
 const PinterestApp = (props) => {
-    const imagenes = [
+
+
+    /* const imagenes = [
         { url: '/images/pedito.jpeg', alt: 'perrito' },
         { url: '/images/gatox.jpeg', alt: 'gato' }
-    ]
+    ] */
 
     return (
         <React.Fragment>
             <Header />
             <p>hola {props.author}</p>
-            <ListaDeImagenes imagenes={imagenes} animal={'mascota'} />
+
+            {/* <ListaDeImagenes imagenes={imagenes} animal={'mascota'} /> */}
             <ContainerImg />
             <FunctionCount />
         </React.Fragment>
@@ -58,17 +61,23 @@ const Header = () => {
     )
 }
 
+const id = '4c974f2e37b1799fdb6e91a0f891a25df26b687e9e6eb77816d9988dd5142e59';
+
 const ContainerImg = () => {
+    // almacenando el result de la promesa en un estado
+    const [imagenes, setImagenes] = useState([])
 
     useEffect(() => {
-        fetch('https://api.unsplash.com/photos/?client_id=4c974f2e37b1799fdb6e91a0f891a25df26b687e9e6eb77816d9988dd5142e59')
+        // agrengando parametro que trae 20 imagenes por pagina
+        fetch(`https://api.unsplash.com/photos/?client_id=${id}&per_page=20`)
             .then((response) => {
                 return response.json();
             })
-            .then((myJson) => {
-                console.log(myJson);
+            .then((data) => {
+                setImagenes(data);
             });
-    })
+    }, [])
+    console.log(imagenes, 'popo');
     return (
         <h1>Mostrando data</h1>
     )
@@ -97,7 +106,7 @@ const FunctionCount = () => {
     )
 }
 
-const ListaDeImagenes = ({ animal, imagenes }) => {
+/* const ListaDeImagenes = ({ animal, imagenes }) => {
     return (
         <div>
             <p>{animal}</p>
@@ -120,7 +129,7 @@ const Image = ({ url, alt }) => {
         </li> 
     )    
 }
-
+ */
 /* class ListaDeImagenes extends React.Component {
 
     render() {
