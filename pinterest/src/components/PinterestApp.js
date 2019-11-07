@@ -17,7 +17,7 @@ import React, { useState, useEffect } from 'react';
     ]
 
     return ( 
-        
+ r       
       <React.Fragment>
         <h1>PinterestApp</h1>
         <p>hola {this.props.author}</p>
@@ -28,25 +28,33 @@ import React, { useState, useEffect } from 'react';
   }
 } */
 
+const id = '4c974f2e37b1799fdb6e91a0f891a25df26b687e9e6eb77816d9988dd5142e59';
+const api = `https://api.unsplash.com/photos/?client_id=${id}&per_page=20`;
+
 const PinterestApp = (props) => {
 
-
-    /* const imagenes = [
-        { url: '/images/pedito.jpeg', alt: 'perrito' },
-        { url: '/images/gatox.jpeg', alt: 'gato' }
-    ] */
+	// trayendo elementos y almacenandolos en una constante
+    const initialState = useFetchApi(api)
 
     return (
         <React.Fragment>
             <Header />
             <p>hola {props.author}</p>
-
+  
             {/* <ListaDeImagenes imagenes={imagenes} animal={'mascota'} /> */}
-            <ContainerImg />
+            <ContainerImg>
+				{
+					initialState.map((item) => {
+						return <CardItem key={item.id} {...item} />
+					})
+				} 
+			</ContainerImg>
             <FunctionCount />
         </React.Fragment>
     )
 }
+
+
 
 const Header = () => {
     return (
@@ -61,15 +69,38 @@ const Header = () => {
     )
 }
 
-const id = '4c974f2e37b1799fdb6e91a0f891a25df26b687e9e6eb77816d9988dd5142e59';
 
-const ContainerImg = () => {
-    // almacenando el result de la promesa en un estado
+
+const ContainerImg = ({children}) => {
+    
+    return (
+        <section>
+          <div className="container">
+            <div className="card-columns">
+              {children}
+            </div>
+          </div>
+        </section>
+    )
+
+}
+
+
+const CardItem = ({ ...item }) => {
+	return(
+	<div className="card">
+		<Image url={item.urls.raw} alt={item.alt_description} />
+	</div>
+	)
+}
+
+// construyendo un hook que hace fetch api
+const useFetchApi = (api) => {
     const [imagenes, setImagenes] = useState([])
 
     useEffect(() => {
         // agrengando parametro que trae 20 imagenes por pagina
-        fetch(`https://api.unsplash.com/photos/?client_id=${id}&per_page=20`)
+        fetch(api)
             .then((response) => {
                 return response.json();
             })
@@ -78,12 +109,8 @@ const ContainerImg = () => {
             });
     }, [])
     console.log(imagenes, 'popo');
-    return (
-        <h1>Mostrando data</h1>
-    )
-
+    return imagenes;
 }
-
 
 
 
@@ -106,30 +133,28 @@ const FunctionCount = () => {
     )
 }
 
-/* const ListaDeImagenes = ({ animal, imagenes }) => {
+/* const ListaDeImagenes = ({ imagenes }) => {
     return (
-        <div>
-            <p>{animal}</p>
-            <ul className='mascotas'>
-                {
-                    imagenes.map((imagen) => {
-                        return <Image url={imagen.url} alt={imagen.alt} />
-                    })
-                }
-            </ul>
-        </div>
+      <div className="card">
+        <figure>
+          {
+            imagenes.map((imagen) => {
+                return <Image key={imagen.id} url={imagen.links.html} alt={imagen.alt_description} />
+            })
+          }
+        </figure>
+      </div>
     )
-}
+} */
 
 const Image = ({ url, alt }) => {
-    return (
-        <li>
-            <img src={url} alt={alt} height="100" />
-            Image Caption
-        </li> 
-    )    
+	return (
+		<img src={url} alt={alt} height="100" />
+	
+	)
+                
 }
- */
+
 /* class ListaDeImagenes extends React.Component {
 
     render() {
