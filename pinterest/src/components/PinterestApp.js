@@ -1,32 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// Components
-// PinterestApp
-//  ListaDeImagenes:
-//  Imagen
-//   pendiente: 
-//      hacer un search de imagenes
-//      fetch API imagenes: en proceso
-//      css, layout
-//   
-/* class PinterestApp extends React.Component {
-
-  render(){
-    const imagenes = [
-      {url: '/images/pedito.jpeg', alt: 'perrito'},
-      {url: '/images/gatox.jpeg', alt: 'gato'}
-    ]
-
-    return ( 
- r       
-      <React.Fragment>
-        <h1>PinterestApp</h1>
-        <p>hola {this.props.author}</p>
-        <ListaDeImagenes imagenes={imagenes} animal={'mascota'} />
-        < FunctionCount />
-      </React.Fragment>
-    )
-  }
-} */
 
 const id = '4c974f2e37b1799fdb6e91a0f891a25df26b687e9e6eb77816d9988dd5142e59';
 const api = `https://api.unsplash.com/photos/?client_id=${id}&per_page=20`;
@@ -35,13 +7,16 @@ const PinterestApp = (props) => {
 
 	// trayendo elementos y almacenandolos en una constante
     const initialState = useFetchApi(api)
+    
 
     return (
         <React.Fragment>
-            <Header />
+            <Header>
+                <Search />
+            </Header>
             <p>hola {props.author}</p>
   
-            {/* <ListaDeImagenes imagenes={imagenes} animal={'mascota'} /> */}
+            {/* iterando dentro de componente para agregar un componente de cada imagen por iteracion */}
             <ContainerImg>
 				{
 					initialState.map((item) => {
@@ -49,28 +24,37 @@ const PinterestApp = (props) => {
 					})
 				} 
 			</ContainerImg>
-            <FunctionCount />
+            
         </React.Fragment>
     )
 }
 
 
 
-const Header = () => {
+const Header = ({children}) => {
     return (
         <header>
             <figure>
                 <img src="././public/images/logo.png" alt="logo-pinterest" />
             </figure>
-            <input placeholder="Buscar" /> {/* componente que debe recibir api */}
+            {children}
             <button>Registrarse</button>
             <button>Iniciar sesión</button>
         </header>
     )
 }
 
+const Search = ({query}) => {
+    return (
+        <div>
+            <input placeholder="Buscar" value={query}/>
+            <button>Buscar</button>
+        </div>
+    )
+}
 
 
+// componente contenedor de imagenes, recibiendo como prop un children(que recibe en el componente app una iteracion con map que retrona un componentecon cada imagen)
 const ContainerImg = ({children}) => {
     
     return (
@@ -85,15 +69,25 @@ const ContainerImg = ({children}) => {
 
 }
 
-
+// componente card por imagen que recibe como prop una todo item(data)
 const CardItem = ({ ...item }) => {
 	return(
 	<div className="card">
+	{/* inseratando componente imagen mandando de prop link de cada imagen y descripcion */}
 		<Image url={item.urls.raw} alt={item.alt_description} />
 	</div>
 	)
 }
 
+// componente imagen que recibe url de imagen para pintar
+const Image = ({ url, alt }) => {
+	return (
+		<img src={url} alt={alt} height="100" />
+	
+	)
+                
+}
+ 
 // construyendo un hook que hace fetch api
 const useFetchApi = (api) => {
     const [imagenes, setImagenes] = useState([])
@@ -112,76 +106,9 @@ const useFetchApi = (api) => {
     return imagenes;
 }
 
-
-
-// Hook de estado, renderizando un contador
-const FunctionCount = () => {
-    // Declarando variable de estado, llamada "count"
-    // argumento para useState es el estado inicial (0)
-    const [count, setCount] = useState(0)
-
-    return (
-        <div>
-            <p>you cliked {count} times</p>
-            <button onClick={() => setCount(count + 1)}>
-                Click me
-            </button>
-            <button onClick={() => setCount(count - 1)}>
-                click me -1
-            </button>
-        </div>
-    )
-}
-
-/* const ListaDeImagenes = ({ imagenes }) => {
-    return (
-      <div className="card">
-        <figure>
-          {
-            imagenes.map((imagen) => {
-                return <Image key={imagen.id} url={imagen.links.html} alt={imagen.alt_description} />
-            })
-          }
-        </figure>
-      </div>
-    )
-} */
-
-const Image = ({ url, alt }) => {
-	return (
-		<img src={url} alt={alt} height="100" />
 	
-	)
-                
-}
 
-/* class ListaDeImagenes extends React.Component {
 
-    render() {
-        const { animal, imagenes } = this.props;
-        return (
-            <div>
-                <p>{animal}</p>
-                <ul className='mascotas'>
-                    {
-                        imagenes.map((imagen) => {
-                            return <Image alt={imagen.alt} url={imagen.url} />
-                        })
-                    }
-                </ul>
-            </div>
-        )
-    }
-} */
 
-/* class Image extends React.Component {
-    render() {
-        return (
-            <li>
-                <img src={this.props.url} alt={this.props.alt} height="100" />
-                Image Caption
-      </li>
-        )
-    }
-} */
+
 export default PinterestApp;
