@@ -13,8 +13,9 @@ export const Search = (props) => {
             .then(res => {
                 return res.json()
             }).then((result) => {
-                props.updateState(result)
                 console.log(result)
+                return props.updateState(result.results)
+                
             })
 
     }

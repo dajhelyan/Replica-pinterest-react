@@ -14,7 +14,8 @@ export const CardItem = ({ ...item }) => {
     } */
 
     return (
-        <div className="card" >
+        <div className="card" onClick={(e) => console.log(e.target)
+        }>
             {/* inseratando componente imagen mandando de prop link de cada imagen y descripcion */}
             <Image url={item.urls.raw} alt={item.alt_description} />
             

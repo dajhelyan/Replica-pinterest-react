@@ -1,11 +1,17 @@
 import React from 'react';
+import { CardItem } from '././CardItem'
 
-export const ContainerImg = ({ children }) => {
+
+export const ContainerImg = ({data}) => {
 
     return (
         <section>
             <div className="card-columns">
-                {children}
+                {
+                    data.map((item) => {
+                        return <CardItem key={item.id} {...item} />
+                    })
+                }
             </div>
         </section>
     )

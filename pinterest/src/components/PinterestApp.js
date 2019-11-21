@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { Header } from '././Header'
 import { Search } from '././Search'
 import { ContainerImg } from '././ContainerImg'
-import { CardItem } from '././CardItem'
 
 
 
@@ -11,7 +10,7 @@ export const id = '4c974f2e37b1799fdb6e91a0f891a25df26b687e9e6eb77816d9988dd5142
 // const api = `https://api.unsplash.com/photos/?client_id=${id}&per_page=20`;
 
 const PinterestApp = () => { //estado inicial
-    const [initialState, setState] = useState([]) 
+    const [data, setData] = useState([]) 
     // trayendo elementos y almacenandolos en una constante
 
     useEffect(() => {
@@ -19,7 +18,7 @@ const PinterestApp = () => { //estado inicial
             .then(res => {
                 return res.json()
             }).then((data) => {
-                setState(data)                
+                setData(data)                
             })
     },[])
 
@@ -28,15 +27,11 @@ const PinterestApp = () => { //estado inicial
     return (
         <React.Fragment>
             <Header>
-                <Search updateState={setState}/>
+                <Search updateState={setData}/>
             </Header>
             {/* iterando dentro de componente para agregar un componente de cada imagen por iteracion */}
-            <ContainerImg>
-                {// implementare ternario con condicion
-                    initialState.map((item) => {
-                        return <CardItem key={item.id} {...item} />
-                    })
-                }
+            <ContainerImg data={data}>
+                
             </ContainerImg>
 
         </React.Fragment>
