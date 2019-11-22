@@ -1,18 +1,19 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
+import Navbar from 'react-bootstrap/Navbar'
+
 
 export const Header = ({ children }) => {
   return (
-    <nav className="navbar-expand{-sm|-md|-lg|-xl} light bg-light">
-      <a className="navbar-brand" href="#">
-        <img src="" width="30" height="30" alt="logo" />
-      </a>
-      {
-        children
-      }
-      <button type="button" className="btn btn-danger">Danger</button>
-      <button type="button" className="btn btn-secondary">Secondary</button>
-    </nav>
+    <Navbar bg="light" expand="lg">
+      <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        {
+          children
+        }
+      </Navbar.Collapse>
+    </Navbar>
   )
 }

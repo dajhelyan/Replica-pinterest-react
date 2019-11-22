@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Header } from '././Header'
 import { Search } from '././Search'
 import { ContainerImg } from '././ContainerImg'
+import Axios from 'axios';
 
 
 
@@ -14,11 +15,9 @@ const PinterestApp = () => { //estado inicial
     // trayendo elementos y almacenandolos en una constante
 
     useEffect(() => {
-        fetch(`https://api.unsplash.com/photos/?client_id=${id}&per_page=20`)
+        Axios(`https://api.unsplash.com/photos/?client_id=${id}&per_page=20`)
             .then(res => {
-                return res.json()
-            }).then((data) => {
-                setData(data)                
+                return setData(res.data)
             })
     },[])
 
@@ -76,30 +75,6 @@ const PinterestApp = () => { //estado inicial
       </Modal>
     );
 } */
-  
-  
-
-
-
-// componente imagen que recibe url de imagen para pintar
-
-
-// construyendo un hook que hace fetch api
-/* const useFetchApi = (Api) => {
-    const [data, setData] = useState([])
-
-
-        // agrengando parametro que trae 20 imagenes por pagina
-        fetch(Api)
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                setData(data);
-            });
  
-    console.log(data, 'popo');
-    return data;
-} */
 
 export default PinterestApp;

@@ -1,22 +1,30 @@
 import React, { useState } from 'react'
+import Form from 'react-bootstrap/Form'
+import FormControl from 'react-bootstrap/FormControl'
+import Button from 'react-bootstrap/Button'
 import { id } from './PinterestApp'
+import Axios from 'axios'
 
 export const Search = (props) => {
     // declarando los estados
     const [query, setQuery] = useState('');
+    const [pageNum, setPageNum] = useState(1)
 
     // const apiSearch = `https://api.unsplash.com/search/photos?&query=${query}&client_id=${id}&per_page=20`
 
     // funcion que ejecuta la llamada a la api (search)
     const searching = () => {
-        fetch(`https://api.unsplash.com/search/photos?&query=${query}&client_id=${id}&per_page=20`)
-            .then(res => {
-                return res.json()
-            }).then((result) => {
-                console.log(result)
-                return props.updateState(result.results)
-                
-            })
+        Axios({
+            method: 'GET',
+            url: `https://api.unsplash.com/search/photos?&client_id=${id}&per_page=20`,
+            params:{ query: query, page: pageNum }
+        }).then(res => {
+            console.log(res.data.results)
+            return props.updateState(res.data.results)
+        }).catch(err => {
+            console.log(err, 'do')
+            
+        })
 
     }
 
@@ -24,6 +32,7 @@ export const Search = (props) => {
     const handleChange = (e) => {
         const newQuery = e.target.value;
         setQuery(newQuery);
+        setPageNum(1)
         // console.log(setQuery, 'oii')
     }
 
@@ -33,19 +42,18 @@ export const Search = (props) => {
     } */
 
     return (
-        <div className="input-group">
-            <div className="input-group-prepend">
-                <span className="input-group-text" id="basic-addon1">@</span>
-            </div>
-            <input type="text" className="form-control" 
-            aria-label="Username" 
-            aria-describedby="basic-addon1" 
-            onChange={handleChange}
-            placeholder="Buscar"
-            value={query}
-            />
-            <button type="button" onClick={searching}>search</button>
-        </div>
+        
+        <Form inline>
+        <FormControl type="text" className="mr-sm-2"
+        onChange={handleChange}
+        placeholder="Buscar"
+        value={query}
+        />
+        
+
+    }
+        <Button variant="outline-success" onClick={searching}>Search</Button>
+      </Form>
 
        
     )
