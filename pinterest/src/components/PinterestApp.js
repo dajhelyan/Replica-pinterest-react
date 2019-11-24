@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 // import { Button, Modal } from 'react-bootstrap';
 import { Header } from '././Header'
 import { Search } from '././Search'
@@ -12,6 +12,7 @@ export const id = '4c974f2e37b1799fdb6e91a0f891a25df26b687e9e6eb77816d9988dd5142
 
 const PinterestApp = () => { //estado inicial
     const [data, setData] = useState([]) 
+    const [loading, setLoading] =useState(true)
     // trayendo elementos y almacenandolos en una constante
 
     useEffect(() => {
@@ -21,15 +22,31 @@ const PinterestApp = () => { //estado inicial
             })
     },[])
 
+    const observer = useRef()
+    const lastCardImg = useCallback(node => {
+      if (loading) return 
+      if (observer.current) observer.current.disconnect() 
+      observer.current = new IntersectionObserver(entries => {
+        if(entries[0].isIntersecting){
+          console.log('visible mrd')
+          
+        }
+      })
+      if(node) observer.current.observer(node)
+        
+      
+        console.log(node, 'popopop')
+        
+    }, [loading])
     
 
     return (
         <React.Fragment>
             <Header>
-                <Search updateState={setData}/>
+                <Search data={data} updateState={setData} updateLoad={setLoading}/>
             </Header>
             {/* iterando dentro de componente para agregar un componente de cada imagen por iteracion */}
-            <ContainerImg data={data}>
+            <ContainerImg data={data} refData={lastCardImg}>
                 
             </ContainerImg>
 

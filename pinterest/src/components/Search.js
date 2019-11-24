@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
@@ -10,10 +10,18 @@ export const Search = (props) => {
     const [query, setQuery] = useState('');
     const [pageNum, setPageNum] = useState(1)
 
+    
+
+    useEffect(() => {
+        props.updateState([])
+    }, [query])
+
+
     // const apiSearch = `https://api.unsplash.com/search/photos?&query=${query}&client_id=${id}&per_page=20`
 
     // funcion que ejecuta la llamada a la api (search)
     const searching = () => {
+        props.updateLoad(true)
         Axios({
             method: 'GET',
             url: `https://api.unsplash.com/search/photos?&client_id=${id}&per_page=20`,
@@ -50,8 +58,7 @@ export const Search = (props) => {
         value={query}
         />
         
-
-    }
+    
         <Button variant="outline-success" onClick={searching}>Search</Button>
       </Form>
 
