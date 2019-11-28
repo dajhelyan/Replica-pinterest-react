@@ -4,7 +4,7 @@ import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
 
 
-export const Search = ({setQuery, query}) => {
+export const Search = ({setQuery, query, setPageNum}) => {
     //dando referencia al iut y mediante ele elemneto capturara valor 
     const formRef = useRef();
 
