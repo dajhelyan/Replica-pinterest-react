@@ -1,8 +1,8 @@
 import React from 'react';
 
-export const Image = ({ url, alt }) => {
+export const Image = ({ url, alt, forwardref  }) => {
     return (
-        <img src={url} alt={alt} />
+        <img ref={forwardref} src={url} alt={alt} />
 
     )
 

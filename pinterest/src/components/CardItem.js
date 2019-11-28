@@ -2,7 +2,7 @@ import React from 'react';
 import { Image } from './Image'
 
 // componente card por imagen que recibe como prop una todo item(data)
-export const CardItem = ({ ...item }) => {
+export const CardItem = ({ forwardref, ...item }) => {
     
 
 
@@ -17,8 +17,8 @@ export const CardItem = ({ ...item }) => {
         <div className="card" onClick={(e) => console.log(e.target)
         }>
             {/* inseratando componente imagen mandando de prop link de cada imagen y descripcion */}
-            <Image url={item.urls.raw} alt={item.alt_description} />
+            <Image forwardref={forwardref} url={item.urls.small} alt={item.alt_description} />
             
         </div>
     )
-}
+}   
