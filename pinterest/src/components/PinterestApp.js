@@ -3,26 +3,22 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Header } from '././Header'
 import { Search } from '././Search'
 import { ContainerImg } from '././ContainerImg'
-
 import useDataSearch from './useDataSearch'
 
-const id = '4c974f2e37b1799fdb6e91a0f891a25df26b687e9e6eb77816d9988dd5142e59';
 const PinterestApp = () => { //estado inicial
-
 
   const [query, setQuery] = useState('');
   const [pageNum, setPageNum] = useState(1);
 
   const {data, loading, hasMore } = useDataSearch(query, pageNum)
 
-
   const observer = useRef()
   const lastCardImg = useCallback(node => {
     if (loading) return
     if (observer.current) observer.current.disconnect() // configurando ob en el noo
     observer.current = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting) {
-        //setPageNum(prevPageNum => prevPageNum + 1)
+      if (entries[0].isIntersecting && hasMore) {
+        // setPageNum(prevPageNum => prevPageNum + 1)
         console.log('iss')
         
       }
@@ -36,11 +32,8 @@ const PinterestApp = () => { //estado inicial
       <Header>
         <Search setQuery={setQuery} query={query} />
       </Header>
-      {/* iterando dentro de componente para agregar un componente de cada imagen por iteracion */}
       <ContainerImg data={data} forwardRef={lastCardImg} >
-
       </ContainerImg>
-
     </React.Fragment>
   )
 }

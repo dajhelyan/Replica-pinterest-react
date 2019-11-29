@@ -1,24 +1,16 @@
 import React from 'react';
 import { Image } from './Image'
+import Card from 'react-bootstrap/Card'
+
 
 // componente card por imagen que recibe como prop una todo item(data)
 export const CardItem = ({ forwardref, ...item }) => {
-    
-
-
-    // const [ on, setOn ] = useState(true)
-
-    /* const handleClick = (e) => {
-        console.log(e.target, 'click');
-
-    } */
 
     return (
-        <div className="card" onClick={(e) => console.log(e.target)
-        }>
+        <Card>
             {/* inseratando componente imagen mandando de prop link de cada imagen y descripcion */}
             <Image forwardref={forwardref} url={item.urls.small} alt={item.alt_description} />
             
-        </div>
+        </Card>
     )
 }   

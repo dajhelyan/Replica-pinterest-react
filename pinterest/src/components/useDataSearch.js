@@ -8,18 +8,22 @@ const useDataSearch = (query, pageNum) => {
   const [loading, setLoading] = useState(true)
   const [hasMore, setHasMore] = useState(false)
 
-  useEffect(() => {
-    Axios(`https://api.unsplash.com/photos/?client_id=${id}&per_page=20`)
+  const fetchData = (query) => {
+    if (query === '') {
+      return Axios(`https://api.unsplash.com/photos/?client_id=${id}&per_page=20`)
       .then(res => {
+        console.log(res.data)
+        
         return setData(res.data)
       })
-  }, []);
+    }
+  }
 
   useEffect(() => {
-    if (query === '') {
-      return;
-    }
+    fetchData(query);
+    
   }, [])
+
     useEffect(() => {
 
       Axios({
@@ -30,6 +34,8 @@ const useDataSearch = (query, pageNum) => {
         setLoading(false)
         setHasMore(true)
         setData(res.data.results)
+        console.log(res.data.results, 'pprpr')
+        
       })
 
 

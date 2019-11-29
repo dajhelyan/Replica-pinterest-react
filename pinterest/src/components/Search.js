@@ -2,6 +2,8 @@ import React, { useRef } from 'react'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
+import Col from 'react-bootstrap/Col'
+import InputGroup from 'react-bootstrap/InputGroup'
 
 
 export const Search = ({setQuery, query, setPageNum}) => {
@@ -18,18 +20,33 @@ export const Search = ({setQuery, query, setPageNum}) => {
 
 
     return (
-
-        <Form inline>
-            <FormControl type="text" className="mr-sm-2"
+        
+        <Form inline as={Col} md="9">
+           
+            
+            
+            <div className="control has-icons-left">
+                <input className="input" 
+                style={{width: "760px", background: "lightgray"}}
+                type="text" 
                 ref={formRef}
                 defaultValue={query}
                 placeholder="Buscar"
-            />
-
-
-            <Button variant="outline-success" onClick={handleClck}>Search</Button>
+                />
+                <span className="icon is-small is-left">
+                    <i style={{color: "black"}}class="fas fa-search"></i>
+                </span>
+            </div>
+            {/* <FormControl
+                style={{width: "80%"}}
+                type="text" 
+                className=" mr-sm-2" 
+                ref={formRef}
+                defaultValue={query}
+                placeholder="Buscar"
+            >
+            </FormControl>  */}
+              <button className="button is-success is-light" onClick={handleClck}>Search</button>
         </Form>
-
-
     )
 }

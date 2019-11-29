@@ -1,6 +1,20 @@
-nav {
-    display: -webkit-inline-box!important;
-    .input-group {
-        width: 85%!important;
-    }
+@import "bootstrap/scss/functions"; 
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins";
+
+/* Your customizations here */
+
+.btn-primary {
+    background: red;
 }
+
+input {
+    width: 86%;
+}
+
+.btn-nav {
+    margin: 0 0 0 10px;
+}
+
+@import "bootstrap";
+
