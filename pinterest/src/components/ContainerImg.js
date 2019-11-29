@@ -7,15 +7,13 @@ export const ContainerImg = ({data, forwardRef}) => {
 
     return (
        
-            <CardColumns >
-                 <Container>
+            <CardColumns style={{columnCount: "5", margin: "20px 50px 0px 50px"}} >
                     {
                         data.map((item) => {
                             return <CardItem key={item.id} forwardref={forwardRef} {...item} />
                             
                         })
                     } 
-                    </Container>
             </CardColumns>
         
     )

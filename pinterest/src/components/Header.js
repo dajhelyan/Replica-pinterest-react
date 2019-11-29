@@ -12,8 +12,8 @@ export const Header = ({ children }) => {
     <Navbar bg="light" expand="lg" style={{ borderBottom: "groove" }}>
       <img
         src="/images/pinterest.png"
-        width="40"
-        height="40"
+        width="30"
+        height="30"
         className="d-inline-block align-top"
         alt="React Bootstrap logo"
       />
