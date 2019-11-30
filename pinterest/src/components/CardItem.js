@@ -8,9 +8,7 @@ export const CardItem = ({ forwardref, ...item }) => {
 
     return (
         <Card>
-            {/* inseratando componente imagen mandando de prop link de cada imagen y descripcion */}
-            <Image forwardref={forwardref} url={item.urls.small} alt={item.alt_description} />
-            
+                <Image forwardref={forwardref} url={item.urls.small} alt={item.alt_description} />
         </Card>
     )
 }   

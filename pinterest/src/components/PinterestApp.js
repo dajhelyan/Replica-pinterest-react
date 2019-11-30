@@ -10,7 +10,7 @@ const PinterestApp = () => { //estado inicial
   const [query, setQuery] = useState('');
   const [pageNum, setPageNum] = useState(1);
 
-  const {data, loading, hasMore } = useDataSearch(query, pageNum)
+  const {data, loading, hasMore } = useDataSearch(query, pageNum, setPageNum)
 
   const observer = useRef()
   const lastCardImg = useCallback(node => {
@@ -18,7 +18,7 @@ const PinterestApp = () => { //estado inicial
     if (observer.current) observer.current.disconnect() // configurando ob en el noo
     observer.current = new IntersectionObserver(entries => {
       if (entries[0].isIntersecting) {
-        // setPageNum(prevPageNum => prevPageNum + 1)
+        setPageNum(prevPageNum => prevPageNum + 1)
         console.log('iss')
         
       }
