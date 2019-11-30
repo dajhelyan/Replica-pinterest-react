@@ -24,7 +24,7 @@ export const Header = ({ children }) => {
         }
         <Button style={{marginRight: "10px"}} variant="danger">Registrarse</Button>
         <Button variant="secondary">Iniciar sesión</Button>
-        <Button variant="outline-secondary" style={{marginLeft: "10px", borderRadius: "29px",borderColor: "white"}}><i class="fas fa-ellipsis-h"></i></Button>
+        <Button variant="outline-secondary" style={{marginLeft: "10px", borderRadius: "29px",borderColor: "white"}}><i className="fas fa-ellipsis-h"></i></Button>
       </Navbar.Collapse>
     </Navbar>
   )

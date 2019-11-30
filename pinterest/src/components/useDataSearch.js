@@ -8,14 +8,18 @@ const useDataSearch = (query, pageNum) => {
   const [loading, setLoading] = useState(true)
   const [hasMore, setHasMore] = useState(false)
 
-  const fetchData = (query) => {
-    if (query === '') {
-      return Axios(`https://api.unsplash.com/photos/?client_id=${id}&per_page=20`)
-      .then(res => {
-        console.log(res.data)
-        
-        return setData(res.data)
-      })
+  const fetchData = async(query) => {
+    try {
+      if (query === '') {
+        await Axios(`https://api.unsplash.com/photos/?client_id=${id}&per_page=20`)
+        .then(res => {
+          console.log(res.data)
+          return setData(res.data)
+        })
+      }
+    }catch {
+      console.log('lolo')
+      
     }
   }
 
