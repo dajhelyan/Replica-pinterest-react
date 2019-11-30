@@ -8,44 +8,32 @@ const useDataSearch = (query, pageNum) => {
   const [loading, setLoading] = useState(true)
   const [hasMore, setHasMore] = useState(false)
 
-  const fetchData = async(query) => {
-    try {
-      if (query === '') {
-        await Axios(`https://api.unsplash.com/photos/?client_id=${id}&per_page=20`)
-        .then(res => {
-          console.log(res.data)
-          return setData(res.data)
-        })
-      }
-    }catch {
-      console.log('lolo')
-      
-    }
-  }
-
-    useEffect(() => {
-
-      Axios({
-        method: "GET",
-        url: `https://api.unsplash.com/search/photos?&client_id=${id}&per_page=20`,
-        params: { query: query, page: pageNum }
-      }).then(res => {
-        setLoading(false)
-        setHasMore(true)
-        setData(res.data.results)
-        console.log(res.data.results, 'pprpr')
-        
+  useEffect(() => {
+    Axios(`https://api.unsplash.com/photos/?client_id=${id}&per_page=20`)
+      .then(res => {
+        return setData(res.data)
       })
-
-      
-
-
-    }, [query, pageNum])
+  }, []);
 
   useEffect(() => {
-    fetchData(query);
-    
-  }, [])
+    if(query === '') {
+      return; 
+    }
+
+    Axios({
+      method: "GET",
+      url: `https://api.unsplash.com/search/photos?&client_id=${id}&per_page=20`,
+      params: { query: query, page: pageNum },
+    })
+    .then(res => {
+      setLoading(false)
+      // setHasMore(true)
+      return setData((valorAnterior) => [...valorAnterior, ...res.data.results] )
+    })
+
+      
+  }, [query, pageNum]);
+
     return { data, loading, hasMore }
   }
 

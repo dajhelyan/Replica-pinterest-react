@@ -17,7 +17,7 @@ const PinterestApp = () => { //estado inicial
     if (loading) return
     if (observer.current) observer.current.disconnect() // configurando ob en el noo
     observer.current = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting && hasMore) {
+      if (entries[0].isIntersecting) {
         // setPageNum(prevPageNum => prevPageNum + 1)
         console.log('iss')
         
