@@ -23,11 +23,6 @@ const useDataSearch = (query, pageNum) => {
     }
   }
 
-  useEffect(() => {
-    fetchData(query);
-    
-  }, [])
-
     useEffect(() => {
 
       Axios({
@@ -42,8 +37,15 @@ const useDataSearch = (query, pageNum) => {
         
       })
 
+      
+
 
     }, [query, pageNum])
+
+  useEffect(() => {
+    fetchData(query);
+    
+  }, [])
     return { data, loading, hasMore }
   }
 
