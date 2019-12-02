@@ -2,6 +2,7 @@ import React from 'react';
 import { CardItem } from '././CardItem'
 import CardColumns from 'react-bootstrap/CardColumns'
 
+
 export const ContainerImg = ({data, forwardRef}) => {
 
     return (
@@ -14,12 +15,16 @@ export const ContainerImg = ({data, forwardRef}) => {
                     forwardref={
                         data.length === 1 + index ? forwardRef:undefined
                     } 
-                    {...item} />
+                    {...item} 
+                    />
                     
                 })
             } 
+      
         </CardColumns>
+        
         
     )
 
 }
+

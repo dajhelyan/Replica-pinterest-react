@@ -20,7 +20,6 @@ const PinterestApp = () => { //estado inicial
       if (entries[0].isIntersecting) {
         setPageNum(prevPageNum => prevPageNum + 1)
         console.log('iss')
-        
       }
     })
     if (node) observer.current.observe(node) //observando nodo ele

@@ -1,10 +1,6 @@
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import Navbar from 'react-bootstrap/Navbar'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
-import Col from 'react-bootstrap/Col'
+import Navbar from 'react-bootstrap/Navbar';
+import Button from 'react-bootstrap/Button';
 
 
 export const Header = ({ children }) => {

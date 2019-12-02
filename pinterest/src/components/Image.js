@@ -1,10 +1,11 @@
-import React from 'react'
-import Card from 'react-bootstrap/Card'
+import React from 'react';
+
 
 export const Image = ({ url, alt, forwardref  }) => {
-    return (
-        <img ref={forwardref} src={url} alt={alt} />
 
+    return (
+        <img ref={forwardref} src={url} alt={alt} />      
     )
 
 }
+

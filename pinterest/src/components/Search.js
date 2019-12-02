@@ -2,11 +2,9 @@ import React, { useRef } from 'react'
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 
-
-export const Search = ({setQuery, query, setPageNum}) => {
+export const Search = ({setQuery, query}) => {
     //dando referencia al iut y mediante ele elemneto capturara valor 
     const formRef = useRef();
-
 
     const handleClck = () =>  {
         const newQuery = formRef.current.value;
